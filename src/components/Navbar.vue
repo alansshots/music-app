@@ -1,9 +1,6 @@
 <template>
 <div class="h-screen hidden lg:block shadow-lg relative w-72">
-    <div class="bg-white
-    
-    bg-white/5 bg-opacity-80 backdrop-blur-sm
-    h-full dark:bg-gray-700">
+    <div class="bg-white/5 bg-opacity-80 backdrop-blur-sm h-full dark:bg-gray-700">
         <div class="flex items-center justify-center pt-6">
             <img src="../assets/logo.png" alt="logo">
         </div>

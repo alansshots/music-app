@@ -5,16 +5,8 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        fade: 'fadeIn 5s ease-in-out',
-      },
-
-      keyframes: theme => ({
-        fadeOut: {
-          '0%': { backgroundColor: theme('colors.transparent') },
-          '100%': { backgroundColor: theme('colors.white') },
-        },
-      }),
-
+        'spin-slow': 'spin 3s linear infinite',
+      }
     },
   },
   plugins: [],

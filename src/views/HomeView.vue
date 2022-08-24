@@ -22,11 +22,11 @@
 
     </div>
 
-    <div v-if="currentTrack" class="absolute h-28 bottom-0 w-8/12 text-purple-800 flex bg-gradient-to-br from-white to-purple-200 backdrop-blur-lg rounded-t-3xl">
+    <div v-if="currentTrack" class="absolute h-28 bottom-0 w-8/12 text-purple-800 flex bg-gradient-to-br from-white to-purple-200/5 backdrop-blur-lg rounded-t-3xl">
       <div class="relative flex w-full px-8 sm:px-12 items-center justify-between">
         <div class="flex items-center justify-start w-1/4 md:w-1/2 lg:w-1/3">
           <div class=" hidden sm:block h-16 w-16 mr-4">
-            <img :src=currentTrack.images.coverart alt="cover art" class="rounded-full animate-spin">
+            <img :src=currentTrack.images.coverart alt="cover art" class="rounded-full animate-spin-slow">
             </div>
             <div class="w-32 md:w-60 lg:w-52 xl:w-fit">
               <p class="truncate">{{currentTrack.title}}</p>
@@ -56,7 +56,7 @@
         </div>
           <div class="hidden lg:flex 2xl:flex items-center justify-end w-1/4 lg:w-1/3">
             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="25" width="25" xmlns="http://www.w3.org/2000/svg"><path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zm3.025 4a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"></path></svg>
-            <input type="range" step="any" min="0" max="1" class="2xl:w-40 lg:w-32 md:w-32 h-1 ml-2" value="0.1">
+            <input type="range" step="1" min="0" max="99" value="1" @change="volume(currentAudio)" id="vol" class="2xl:w-40 lg:w-32 md:w-32 h-1 ml-2">
          </div>
       </div>
     </div>
@@ -77,6 +77,7 @@ export default {
           topTracks:null,
           currentAudio: null,
           currentTrack:null,
+          currentvolume: null,
           audioOn: true,
           audioOff: false,
         }
@@ -87,6 +88,7 @@ export default {
         this.currentAudio.play();
         this.audioOff = true
         this.audioOn = false
+        // this.currentAudio.volume = this.currentVolume
       },
       playAudio(currentAudio) {
         currentAudio.play();
@@ -95,6 +97,10 @@ export default {
         if(currentAudio) {
           currentAudio.pause();
         }
+      },
+      volume(currentAudio){
+        this.currentVolume = 0 + '.' + document.querySelector('#vol').value;
+        currentAudio.volume = this.currentVolume
       }
     },
     mounted() {

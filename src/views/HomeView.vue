@@ -50,9 +50,9 @@
           </div>       
           <div class="hidden sm:flex flex-row items-center w-full">
             <p>0:47</p>
-            <input type="range" step="any" min="0" max="89.977324" class="md:block w-24 md:w-56 2xl:w-96 h-1 mx-4 2xl:mx-6 rounded-lg bg-gray-00" value="47.946506"><p>1:29</p>
+            <input type="range" step="any" min="0" max="89.977324" class="md:block w-24 md:w-56 2xl:w-96 h-1 mx-4 2xl:mx-6 rounded-lg bg-gray-00" value="47.946506"><p>{{currentAudioDuration}}</p>
           </div>
-            <audio src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/0d/13/1a/0d131a2c-3497-6b82-2888-0fad0b7aa499/mzaf_15123690966549431974.plus.aac.ep.m4a"></audio>
+            <audio :src=currentTrack.hub.actions[1].uri ></audio>
         </div>
           <div class="hidden lg:flex 2xl:flex items-center justify-end w-1/4 lg:w-1/3">
             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="25" width="25" xmlns="http://www.w3.org/2000/svg"><path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zm3.025 4a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"></path></svg>
@@ -76,8 +76,9 @@ export default {
         return {
           topTracks:null,
           currentAudio: null,
+          currentAudioDuration: null,
           currentTrack:null,
-          currentvolume: null,
+          currentVolume: null,
           audioOn: true,
           audioOff: false,
         }
@@ -85,10 +86,11 @@ export default {
     methods: {
       playNewAudio(sound) {
         this.currentAudio = new Audio(sound);
+        this.currentAudioDuration = this.currentAudio.duration;
+        console.log(this.currentAudioDuration)
         this.currentAudio.play();
         this.audioOff = true
         this.audioOn = false
-        // this.currentAudio.volume = this.currentVolume
       },
       playAudio(currentAudio) {
         currentAudio.play();
